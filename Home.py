@@ -3,35 +3,44 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from collections import defaultdict
+
 # Set page config for a more appealing look
 st.set_page_config(layout="wide", page_title="Aslan Hattukai", page_icon="📊")
 
 # Custom CSS for color scheme
 st.markdown("""
 <style>
-    body {
-        color: black;
-        background-color: white;
+    :root {
+        --primary-color: #007FFF; /* Azure color */
+        --secondary-color: #ffffff;
+        --text-color: #000000;
+        --background-color: #ffffff;
     }
-    .stApp {
-        background-color: white;
+    body, .stApp {
+        color: var(--text-color);
+        background-color: var(--background-color);
     }
     .stButton>button {
-        color: white;
-        background-color: #00008B;
-        border-color: #00008B;
+        color: var(--secondary-color);
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
     }
-    .stSelectbox {
-        color: black;
+    .stSelectbox, .stTab {
+        color: var(--text-color);
     }
-    .stTab {
-        color: black;
+    h1, h2, h3, h4, h5, h6, a {
+        color: var(--primary-color);
     }
-    h1, h2, h3, h4, h5, h6 {
-        color: #00008B;
+    .stTextInput > div > div > input {
+        color: var(--text-color);
+        background-color: var(--background-color);
     }
-    a {
-        color: #00008B;
+    .css-1cpxqw2, .css-2trqyj, .css-1d391kg {
+        flex-direction: column;
+    }
+    .css-1cpxqw2 img {
+        max-width: 100%;
+        height: auto;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -45,7 +54,90 @@ with col1:
 
 with col2:
     st.image("image.jpg", width=150)  # Replace with your image URL
+# Intro
+st.header("Introduction")
+st.markdown("""
+As a Biomedical Scientist, I possess a deep understanding of the value of data in generating descriptive and predictive insights.
+This expertise helps me to accurately identify data requirements and use cases. 
+Throughout my professional career I have been pursuing my passion for data. This has allowed me to gain a broad experience working
+on several projects and becoming familiar with a variety of data purpose-built architectures both on-premises and in the cloud.
+""")
 
+# Skills Section
+st.header("Skills")
+
+# Create two columns
+col1, col2 = st.columns([3, 2])
+
+with col1:
+    # Radar chart code (unchanged)
+    technology_stack = {
+        "Cloud Platforms": ["Microsoft Azure", "AWS", "Snowflake"],
+        "Data Engineering": ["dbt", "Databricks", "Apache Spark", "SSIS/SSMS"],
+        "Frameworks": ["Kedro", "Django", "Streamlit", "FastAPI", "SQL Alchemy"],
+        "Visualization": ["PowerBI"],
+        "DevOps": ["Airflow", "ArgoCD/Jenkins", "Docker/Kubernetes"],
+        "Development Tools": ["Jupyter notebook", "Bitbucket/Github", "Jira", "VSCode"],
+        "Specialized Tools": ["BIOVIA Compose", "CISPRO", "ELN"]
+    }
+    expertise = {
+        "Cloud Platforms": 7,
+        "Data Engineering": 9,
+        "Frameworks": 7,
+        "Visualization": 8,
+        "DevOps": 8,
+        "Development Tools": 8,
+        "Specialized Tools": 7
+    }
+    categories = list(expertise.keys())
+    values = list(expertise.values())
+
+    fig = go.Figure()
+    fig.add_trace(go.Scatterpolar(
+        r=values + values[:1],
+        theta=categories + categories[:1],
+        fill='toself',
+        name='Skills',
+        hoverinfo='text',
+        text=[f"{cat}: {val}{', '.join(technology_stack[cat])}" for cat, val in zip(categories, values)],
+        line=dict(color='#3498db')
+    ))
+
+    fig.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+                range=[0, 10]
+            ),
+            bgcolor='rgba(240, 242, 246, 0.8)'
+        ),
+        showlegend=False,
+        paper_bgcolor='rgba(0,0,0,0)',
+        plot_bgcolor='rgba(0,0,0,0)',
+        height=500  # Adjust this value to control the height of the chart
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+with col2:
+    # Add some vertical space before the text
+    st.write("")
+    st.write("")
+    st.write("")
+    
+    # Technology stack text
+    st.markdown("""
+    **Data Engineering:** dbt, Databricks, Apache Spark, SSIS/SSMS
+
+    **Frameworks:** Kedro, Django, Streamlit, FastAPI, SQL Alchemy
+
+    **Visualization:** PowerBI, Tableau
+
+    **DevOps:** Airflow, ArgoCD, Jenkins, Docker, Kubernetes
+
+    **Development Tools:** Jupyter notebook, Bitbucket/Github, Jira, VSCode
+
+    **Specialized Tools:** BIOVIA Compose, CISPRO, ELN
+    """)
 
 # Experience Section
 st.header("Experience")
@@ -214,12 +306,13 @@ st.header("Coding Languages")
 coding_experience = {
     "Python": 5,
     "SQL": 4,
-    "R": 3
+    "R": 3,
+    "Bash": 2
 }
 coding_df = pd.DataFrame(list(coding_experience.items()), columns=["Language", "Years of Experience"])
 
 # Define custom color map
-color_map = {"Python": "#0078D4", "SQL": "#FFD700", "R": "#800080"}
+color_map = {"Python": "#0078D4", "SQL": "#FFD700", "R": "#800080", "Bash": "#FF0000"}
 
 fig = px.bar(coding_df, x="Language", y="Years of Experience", title="Experience in Coding Languages",
              labels={"Years of Experience": "Years of Experience"}, color="Language",
@@ -234,81 +327,6 @@ fig.update_layout(
 )
 
 st.plotly_chart(fig)
-# Skills Section
-st.header("Skills")
-
-# Create two columns
-col1, col2 = st.columns([3, 2])
-
-with col1:
-    # Radar chart code (unchanged)
-    technology_stack = {
-        "Cloud Platforms": ["Microsoft Azure", "AWS", "Snowflake"],
-        "Data Engineering": ["dbt", "Databricks", "Apache Spark", "SSIS/SSMS"],
-        "Frameworks": ["Kedro", "Django", "Streamlit", "FastAPI", "SQL Alchemy"],
-        "Visualization": ["PowerBI"],
-        "DevOps": ["Airflow", "ArgoCD/Jenkins", "Docker/Kubernetes"],
-        "Development Tools": ["Jupyter notebook", "Bitbucket/Github", "Jira", "VSCode"],
-        "Specialized Tools": ["BIOVIA Compose", "CISPRO", "ELN"]
-    }
-    expertise = {
-        "Cloud Platforms": 7,
-        "Data Engineering": 9,
-        "Frameworks": 7,
-        "Visualization": 8,
-        "DevOps": 8,
-        "Development Tools": 8,
-        "Specialized Tools": 7
-    }
-    categories = list(expertise.keys())
-    values = list(expertise.values())
-
-    fig = go.Figure()
-    fig.add_trace(go.Scatterpolar(
-        r=values + values[:1],
-        theta=categories + categories[:1],
-        fill='toself',
-        name='Skills',
-        hoverinfo='text',
-        text=[f"{cat}: {val}{', '.join(technology_stack[cat])}" for cat, val in zip(categories, values)],
-        line=dict(color='#3498db')
-    ))
-
-    fig.update_layout(
-        polar=dict(
-            radialaxis=dict(
-                visible=True,
-                range=[0, 10]
-            ),
-            bgcolor='rgba(240, 242, 246, 0.8)'
-        ),
-        showlegend=False,
-        paper_bgcolor='rgba(0,0,0,0)',
-        plot_bgcolor='rgba(0,0,0,0)',
-        height=500  # Adjust this value to control the height of the chart
-    )
-    st.plotly_chart(fig, use_container_width=True)
-
-with col2:
-    # Add some vertical space before the text
-    st.write("")
-    st.write("")
-    st.write("")
-    
-    # Technology stack text
-    st.markdown("""
-    **Data Engineering:** dbt, Databricks, Apache Spark, SSIS/SSMS
-
-    **Frameworks:** Kedro, Django, Streamlit, FastAPI, SQL Alchemy
-
-    **Visualization:** PowerBI, Tableau
-
-    **DevOps:** Airflow, ArgoCD, Jenkins, Docker, Kubernetes
-
-    **Development Tools:** Jupyter notebook, Bitbucket/Github, Jira, VSCode
-
-    **Specialized Tools:** BIOVIA Compose, CISPRO, ELN
-    """)
 
 # Languages Section
 st.header("Languages")
