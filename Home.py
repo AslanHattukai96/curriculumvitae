@@ -328,6 +328,47 @@ fig.update_layout(
 
 st.plotly_chart(fig)
 
+# Education Section
+st.header("Education")
+
+education = [
+    {
+        "degree": "Secondary diploma, Latin and Sciences",
+        "institution": "Koninklijk Atheneum Maaseik",
+        "dates": "2009 - 2015",
+    },
+    {
+        "degree": "B.Sc. Biomedical Sciences",
+        "institution": "Katholic University of Leuven",
+        "dates": "2016 - 2019",
+    },
+    {
+        "degree": "M.Sc. Biomedical Sciences",
+        "institution": "Katholic University of Leuven",
+        "dates": "2019 - 2021",
+    },
+]
+
+# Organize education by start year
+education_by_year = defaultdict(list)
+for edu in education:
+    start_year = edu["dates"].split(" - ")[0]
+    education_by_year[start_year].append(edu)
+
+# Sort years in descending order
+sorted_years_edu = sorted(education_by_year.keys(), reverse=True)
+
+# Dropdown for selecting the year
+selected_year = st.selectbox("Select a year", sorted_years_edu)
+
+# Display the selected education details
+if selected_year:
+    selected_education = education_by_year[selected_year][0]  # Assuming one education per year
+
+    st.subheader(selected_education["degree"])
+    st.write(f"**Institution:** {selected_education['institution']}")
+    st.write(f"**Dates:** {selected_education['dates']}")
+
 # Languages Section
 st.header("Languages")
 languages = {
