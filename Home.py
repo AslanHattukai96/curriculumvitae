@@ -3,6 +3,10 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 from collections import defaultdict
+from utils import login
+
+if not login():
+    st.stop()
 
 # Set page config for a more appealing look
 st.set_page_config(layout="wide", page_title="Aslan Hattukai", page_icon="📊")
