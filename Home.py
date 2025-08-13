@@ -83,7 +83,7 @@ with col1:
     expertise = {
         "Cloud Platforms": 7,
         "Data Engineering": 9,
-        "Frameworks": 7,
+        "Frameworks": 8,
         "Visualization": 8,
         "DevOps": 8,
         "Development Tools": 8,
