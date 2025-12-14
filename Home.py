@@ -160,7 +160,7 @@ experience = [
     {
         "role": "Application Developer",
         "company": "Arvesta/ Fertilizer tool",
-        "dates": "04 2024 – ongoing",
+        "dates": "04 2024 – 07 2024 ",
         "description": """
         Arvesta is a prominent agricultural and horticultural company. They have been aiming to develop a module to aid them in recommending tailored fertilization considering government limits, long term soil health and environmental impact. To make full use and test the model that their R&D team has built we translate the models into an application that can be used by their farm advisors in the field.
         - Set up project plan, implementation and testing and deployment approach.
