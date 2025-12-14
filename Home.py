@@ -57,10 +57,10 @@ with col2:
 # Intro
 st.header("Introduction")
 st.markdown("""
-As a Biomedical Scientist, I possess a deep understanding of the value of data in generating descriptive and predictive insights.
-This expertise helps me to accurately identify data requirements and use cases. 
-Throughout my professional career I have been pursuing my passion for data. This has allowed me to gain a broad experience working
-on several projects and becoming familiar with a variety of data purpose-built architectures both on-premises and in the cloud.
+Data Specialist focused on driving threat intelligence through high-quality data.
+Expertise includes developing analytical frameworks, leveraging cloud stacks (AWS, Snowflake, dbt), 
+and implementing stringent validation and monitoring protocols crucial for training and validating AI/ML models.
+Dedicated to data reliability and serving as the key analysis focal point for research and product teams.
 """)
 
 # Skills Section
@@ -143,6 +143,20 @@ with col2:
 st.header("Experience")
 
 experience = [
+    {
+        "role": "Data Engineer",
+        "company": "J&J/Clinical IT",
+        "dates": "08 2024 – Present",
+        "description": """
+        The Clinical IT Data Team supports Johnson & Johnson’s medical research initiatives by ingesting, processing, and delivering high-quality reseach data. The team recently transitioned to a modern cloud-based stack using AWS and Snowflake, with Datacoves (dbt, Airflow) and Permafrost enabling agile data pipeline development.
+        - Designed and implemented robust ingestion frameworks tailored to diverse source systems, with built-in monitoring.
+        - Work closely business stakeholders to gather requirements and translate them into scalable data infrastructure solutions.
+        - Developed and orchestrated data pipelines and transformation workflows using Apache Airflow and dbt.
+        - Built dashboards and operational monitoring tools to track data quality, pipeline performance, and business KPIs.
+        - Implemented automated alerting and notification systems for pipeline failures using Jenkins, Bitbucket.
+
+        """
+    },
     {
         "role": "Application Developer",
         "company": "Arvesta/ Fertilizer tool",
